@@ -260,3 +260,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+Local instance MySQL_local_host.session.sql
