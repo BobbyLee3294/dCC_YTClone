@@ -7,5 +7,5 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     video_id = models.CharField(max_length=255)
     text = models.CharField(max_length=1000)
-    likes = models.IntegerField(max_length=3)
-    dislikes = models.IntegerField(max_length=3)
+    likes = models.IntegerField()
+    dislikes = models.IntegerField()
