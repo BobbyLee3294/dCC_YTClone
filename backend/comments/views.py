@@ -28,11 +28,15 @@ def get_comments_by_video_id(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        video_id_param = request.query_params.get('video_id')
         comments = Comment.objects.filter(user_id=request.user_id)
+        serializer = CommentSerializer(comments, many=True)
+
+        video_id_param = request.query_params.get('video_id')
         filtered_serializer = comments.filter(video_id__type=video_id_param)
-
         comment_serializer = CommentSerializer(filtered_serializer, many=True)
+        if video_id_param:
+            video_id_serializer = CommentSerializer(
+                comment_serializer, many=True)
+            return Response(video_id_serializer.data, status=status.HTTP_200_OK)
 
-        video_id_serializer = CommentSerializer(comment_serializer, many=True)
-        return Response(video_id_serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
