@@ -7,28 +7,32 @@ from .models import Comment
 
 # Create your views here.
 
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
-def get_comments_by_video_id(request):
-    video_id_param = request.query_params.get('video_id')
+def get_all_comments(request):
     comments = Comment.objects.all()
-    video_id_filter = comments.filter(video_id__type=video_id_param)
-
     serializer = CommentSerializer(comments, many=True)
+    return Response(serializer.data)
 
-    if video_id_param:
-        filtered_serializer = CommentSerializer(video_id_filter, many=True)
-        return Response(filtered_serializer.data, status=status.HTTP_200_OK)
 
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def user_comments(request):
-    print('User ', f'{request.user.id} {request.user.email} {request.user.username}')
+def get_comments_by_video_id(request):
+    print(
+        'User', f'{request.user.id} {request.user.email} {request.user.username}')
+    if request.method == 'POST':
+        serializer = CommentSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    elif request.method == 'GET':
+        video_id_param = request.query_params.get('video_id')
+        comments = Comment.objects.filter(user_id=request.user_id)
+        filtered_serializer = comments.filter(video_id__type=video_id_param)
 
-    serializer = CommentSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save(user=request.user)
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        comment_serializer = CommentSerializer(filtered_serializer, many=True)
+
+        video_id_serializer = CommentSerializer(comment_serializer, many=True)
+        return Response(video_id_serializer.data, status=status.HTTP_200_OK)
