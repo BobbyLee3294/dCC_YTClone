@@ -30,11 +30,14 @@ def get_comments_by_video_id(request):
     elif request.method == 'GET':
         comments = Comment.objects.filter(user_id=request.user_id)
         serializer = CommentSerializer(comments, many=True)
-
+        
         video_id_param = request.query_params.get('video_id')
-        filtered_serializer = comments.filter(video_id__type=video_id_param)
-        comment_serializer = CommentSerializer(filtered_serializer, many=True)
+
         if video_id_param:
+            filtered_serializer = comments.filter(
+                video_id__type=video_id_param)
+            comment_serializer = CommentSerializer(
+                filtered_serializer, many=True)
             video_id_serializer = CommentSerializer(
                 comment_serializer, many=True)
             return Response(video_id_serializer.data, status=status.HTTP_200_OK)
