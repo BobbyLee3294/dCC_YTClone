@@ -1,0 +1,109 @@
+{
+	"info": {
+		"_postman_id": "7772c92b-7113-457f-acce-a2955fe4eab4",
+		"name": "YT_Clone",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24318224"
+	},
+	"item": [
+		{
+			"name": "get_all_comments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/comments/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get comments by video_id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc1MTM4NzI4LCJpYXQiOjE2NzQxNjAyMzksImp0aSI6Ijc4YTgxZWEzNDQ1YzRhY2M4MzVmOTYwZWU2MmVlNjFkIiwidXNlcl9pZCI6MywidXNlcm5hbWUiOiJmaXJzdF91c2VyIiwiZmlyc3RfbmFtZSI6IkJvYiJ9.C1KQ4h9B0pbpGO3ncRhoMeC_RvRrfPefWxwke-hJJoA",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/comments/?video_id=newvideo",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						""
+					],
+					"query": [
+						{
+							"key": "video_id",
+							"value": "newvideo"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post Comment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjc1MTM4NzI4LCJpYXQiOjE2NzQxNjAyMzksImp0aSI6Ijc4YTgxZWEzNDQ1YzRhY2M4MzVmOTYwZWU2MmVlNjFkIiwidXNlcl9pZCI6MywidXNlcm5hbWUiOiJmaXJzdF91c2VyIiwiZmlyc3RfbmFtZSI6IkJvYiJ9.C1KQ4h9B0pbpGO3ncRhoMeC_RvRrfPefWxwke-hJJoA",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"video_id\": \"Imademyfirstvideo\",\r\n    \"text\": \"This is my first video. Now give me some likes\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/comments/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"comments",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
