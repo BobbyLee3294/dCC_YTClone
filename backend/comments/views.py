@@ -18,28 +18,14 @@ def get_all_comments(request):
 
 @api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
-def get_comments_by_video_id(request):
-    print(
-        'User', f'{request.user.id} {request.user.email} {request.user.username}')
+def get_comments_by_video_id(request, video_id):
     if request.method == 'POST':
-        serializer = CommentSerializer(data=request.data)
+        serializer = CommentSerializer(data=request.data, partial=True)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            serializer.save(user=request.user, video_id=video_id)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
-        comments = Comment.objects.filter(user_id=request.user_id)
+        comments = Comment.objects.filter(video_id=video_id)
         serializer = CommentSerializer(comments, many=True)
-        
-        video_id_param = request.query_params.get('video_id')
-
-        if video_id_param:
-            filtered_serializer = comments.filter(
-                video_id__type=video_id_param)
-            comment_serializer = CommentSerializer(
-                filtered_serializer, many=True)
-            video_id_serializer = CommentSerializer(
-                comment_serializer, many=True)
-            return Response(video_id_serializer.data, status=status.HTTP_200_OK)
-
         return Response(serializer.data, status=status.HTTP_200_OK)
