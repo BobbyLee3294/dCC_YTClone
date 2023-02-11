@@ -32,8 +32,22 @@ function App() {
         />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/search" element={<SearchPage />} />
-        <Route path="/videos" element={<VideoPage />} />
+        <Route
+          path="/search"
+          element={
+            <PrivateRoute>
+              <SearchPage />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/videos"
+          element={
+            <PrivateRoute>
+              <VideoPage />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/addcar"
           element={
