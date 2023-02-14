@@ -13,7 +13,7 @@ export default function VideoPlayer({ setSavedData }) {
           </div>
           <div>
             <h3>{snippet.title}</h3>
-            <p>{snippet.description.silce(0, 100) + "..."}</p>
+            <p>{snippet.description.slice(0, 100) + "..."}</p>
             <Link to={`/videos/${items.id}`}>Watch Here...</Link>
           </div>
         </div>
