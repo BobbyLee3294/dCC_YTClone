@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import useCustomForm from "../../hooks/useCustomForm";
-import { Link } from "react-router-dom";
 import "./LoginPage.css";
 
 const LoginPage = () => {
@@ -33,7 +33,7 @@ const LoginPage = () => {
         <label>
           Password:{" "}
           <input
-            type="text"
+            type="password"
             name="password"
             value={formData.password}
             onChange={handleInputChange}
