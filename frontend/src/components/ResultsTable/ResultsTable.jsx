@@ -1,24 +1,28 @@
-const ResultsTable = () => {
+const ResultsTable = (props) => {
   return (
-    <>
-      {savedData.items.map((el) => {
-        return (
-          <div className="card" key={el.id}>
-            <div className="img-wrapper">
-              <img
-                src={`https://www.youtube.com/watch?v=${items.id.videoID}/sddefault.jpg`}
-                alt={el.snippet.title}
-              ></img>
-            </div>
-            <div>
-              <h3>{elsnippet.title}</h3>
-              <p>{el.snippet.description.slice(0, 100) + "..."}</p>
-              <Link to={`/videos/${items.id}`}>Watch Here...</Link>
-            </div>
-          </div>
-        );
-      })}
-    </>
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Video Id</th>
+            <th>Title</th>
+            <th>Channel Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.parentSavedData?.map((snippet, index) => {
+            return (
+              <tr key={index}>
+                <td id="tableVideoId">{id.videoId}</td>
+                <td id="tableVideoTitle">{snippet.title}</td>
+                <td id="tableChannelTitle">{index.snippet.ChannelTitle}</td>
+                <td id="tableKind">{index}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
   );
 };
 
