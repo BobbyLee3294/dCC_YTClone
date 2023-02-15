@@ -29,13 +29,14 @@ const HomePage = () => {
   return (
     <div className="container">
       <h1>Home Page for {user.username}!</h1>
-      <Link to="/addcar">Add Car!</Link>
+      {/* <Link to="/addcar">Add Car!</Link>
       {cars &&
         cars.map((car) => (
           <p key={car.id}>
             {car.year} {car.model} {car.make}
           </p>
-        ))}
+        ))} */}
+      //TODO #1: place bookshelves here
     </div>
   );
 };
