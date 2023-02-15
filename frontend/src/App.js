@@ -22,14 +22,14 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        {/* <Route
+        <Route
           path="/"
           element={
             <PrivateRoute>
               <HomePage />
             </PrivateRoute>
           }
-        /> */}
+        />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route
