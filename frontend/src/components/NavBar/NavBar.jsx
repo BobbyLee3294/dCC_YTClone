@@ -14,9 +14,18 @@ const Navbar = () => {
           <Link to="/" style={{ textDecoration: "none", color: "white" }}>
             <b>YourTummy</b>
           </Link>
+        </li>
+        <li className="search">
           <Link to="/search" style={{ textDecoration: "none", color: "wheat" }}>
             <>
-              <button onClick={SearchPage}>Search</button>
+              <button>Search</button>
+            </>
+          </Link>
+        </li>
+        <li className="videos">
+          <Link to="/videos" style={{ textDecoration: "none", color: "white" }}>
+            <>
+              <button>Videos</button>
             </>
           </Link>
         </li>
