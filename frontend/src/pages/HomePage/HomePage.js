@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
 import axios from "axios";
+import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
+import SearchPage from "../SearchPage/SearchPage";
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -12,25 +14,35 @@ const HomePage = () => {
   // const [cars, setCars] = useState([]);
 
   useEffect(() => {
-    const fetchBookshelves = async () => {
-      try {
-        let response = await axios.get("");
-      } catch (error) {}
-    };
-    return (
-      <div className="container">
-        <h1>Home Page</h1>
-        <p>How are you doing today, {user.username}</p>
-        {/* <Link to="/addcar">Add Car!</Link>
+    // const fetchCars = async () => {
+    //   try {
+    //     let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
+    //       headers: {
+    //         Authorization: "Bearer " + token,
+    //       },
+    //     });
+    //     setCars(response.data);
+    //   } catch (error) {
+    //     console.log(error.response.data);
+    //   }
+    // };
+    // fetchCars();
+  }, [token]);
+  return (
+    <div className="container">
+      <h1>Home Page for {user.username} !</h1>
+      <p>How are you doing?</p>
+      {/* <VideoPlayer /> */}
+      {/* <Link to="/addcar">Add Car!</Link>
       {cars &&
         cars.map((car) => (
           <p key={car.id}>
             {car.year} {car.model} {car.make}
           </p>
         ))} */}
-        {/* TODO #1: place bookshelves here*/}
-      </div>
-    );
-  });
+      {/* TODO #1: place bookshelves here*/}
+    </div>
+  );
 };
+
 export default HomePage;
