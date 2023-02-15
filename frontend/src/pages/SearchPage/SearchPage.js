@@ -18,16 +18,18 @@ const SearchPage = () => {
   useEffect(() => {
     getVideo();
     console.log("Collecting results from YouTube.");
-  }, [queryParam]);
+  }, []);
 
   async function getVideo() {
     try {
       let response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?q=${queryParam}&key=${KEY}&part=snippet&type=video`
       );
-      console.log(response.data);
-      setSavedData(response.data);
-      console.log(savedData);
+      console.log(response.data.items[0].id.videoId);
+      console.log(response.data.items[0].snippet.title);
+      console.log(response.data.items[0].snippet.channelTitle);
+      setSavedData(response.data.items);
+      // console.log(savedData);
     } catch (error) {
       console.log(error.message);
     }
@@ -39,7 +41,7 @@ const SearchPage = () => {
         ParentSavedData={savedData}
         getVideo={getVideo}
       />
-      <ResultsTable savedData={savedData} />
+      <ResultsTable ParentSavedData={savedData} />
     </div>
   );
 };
