@@ -8,7 +8,9 @@ const SearchBar = (props) => {
     props.setQueryParam(search);
     // props.getVideo();
   }
-
+  function onClick(e) {
+    console.log(props.parentSavedData);
+  }
   return (
     <div>
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -20,7 +22,7 @@ const SearchBar = (props) => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <button id="search-btn" type="submit">
+        <button id="search-btn" type="submit" onClick={(e) => onClick(e)}>
           🔍
         </button>
       </form>
