@@ -6,10 +6,7 @@ const SearchBar = (props) => {
   function handleSubmit(e) {
     e.preventDefault();
     props.setQueryParam(search);
-    // props.getVideo();
-  }
-  function onClick(e) {
-    console.log(props.parentSavedData);
+    props.getVideo();
   }
   return (
     <div>
@@ -22,7 +19,7 @@ const SearchBar = (props) => {
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <button id="search-btn" type="submit" onClick={(e) => onClick(e)}>
+        <button id="search-btn" type="submit">
           🔍
         </button>
       </form>
