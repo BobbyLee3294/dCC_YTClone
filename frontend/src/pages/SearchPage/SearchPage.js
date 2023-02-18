@@ -5,9 +5,8 @@ import useAuth from "../../hooks/useAuth";
 import { KEY } from "../../YTAPIKey";
 
 //import components
-import ResultsTable from "../../components/ResultsTable/ResultsTable";
+import ResultCard from "../../components/ResultCard/ResultCard";
 import SearchBar from "../../components/SearchBar/SearchBar";
-import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 
 const SearchPage = () => {
   //this page is used to set up our Axios requests to fetch videos from the YouTube API based on the provided search string
@@ -25,9 +24,7 @@ const SearchPage = () => {
       let response = await axios.get(
         `https://www.googleapis.com/youtube/v3/search?q=${queryParam}&key=${KEY}&part=snippet&type=video`
       );
-      console.log(response.data.items[0].id.videoId);
-      console.log(response.data.items[0].snippet.title);
-      console.log(response.data.items[0].snippet.channelTitle);
+      console.log(response.data.items);
       setSavedData(response.data.items);
       // console.log(savedData);
     } catch (error) {
@@ -36,12 +33,12 @@ const SearchPage = () => {
   }
   return (
     <div id="container">
-      <SearchBar
-        setQueryParam={setQueryParam}
-        ParentSavedData={savedData}
-        getVideo={getVideo}
-      />
-      <ResultsTable ParentSavedData={savedData} />
+      <div>
+        <SearchBar setQueryParam={setQueryParam} getVideo={getVideo} />
+      </div>
+      <div>
+        <ResultCard parentSavedData={savedData} />
+      </div>
     </div>
   );
 };
