@@ -22,13 +22,13 @@ const Navbar = () => {
             </>
           </Link>
         </li>
-        <li className="videos">
+        {/* <li className="videos">
           <Link to="/videos" style={{ textDecoration: "none", color: "white" }}>
             <>
               <button>Videos</button>
             </>
           </Link>
-        </li>
+        </li> */}
         <li>
           {user ? (
             <>
