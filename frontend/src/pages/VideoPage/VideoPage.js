@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
-import SearchBar from "../../components/SearchBar/SearchBar";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
-const VideoPage = (props) => {
-  const { queryParam, setQueryParam } = props;
 
+const VideoPage = () => {
+  useEffect(() => {
+    //playVideo or something that starts the VideoPlayer component
+  });
+  //inialize playVideo()
   return (
     <>
-      <SearchBar setQueryParam={setQueryParam} />
       <VideoPlayer />
+      {}
     </>
   );
 };
