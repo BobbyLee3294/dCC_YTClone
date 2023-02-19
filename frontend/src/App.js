@@ -3,7 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 // Pages Imports
-import AddCarPage from "./pages/AddCarPage/AddCarPage";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
@@ -48,14 +47,6 @@ function App() {
             </PrivateRoute>
           }
         />
-        {/* <Route
-          path="/addcar"
-          element={
-            <PrivateRoute>
-              <AddCarPage />
-            </PrivateRoute>
-          }
-        /> */}
       </Routes>
       <Footer />
     </div>
