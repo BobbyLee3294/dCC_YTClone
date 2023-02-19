@@ -12,7 +12,7 @@ const HomePage = () => {
   //TODO: Add an AddCars Page to add a car for a logged in user's garage
   const [user, token] = useAuth();
   // const [cars, setCars] = useState([]);
-
+  const [quote, setQuote] = useState([]);
   useEffect(() => {
     // const fetchCars = async () => {
     //   try {
@@ -27,11 +27,24 @@ const HomePage = () => {
     //   }
     // };
     // fetchCars();
+    // fetchQuote();
   }, [token]);
+
+  // async function fetchQuote() {
+  //   try {
+  //     const response = await axios.get("https://zenquotes.io/api/random/");
+  //     // let data = await response.json();
+  //     // console.log(data);
+  //     setQuote(response);
+  //   } catch (error) {
+  //     console.log(error.message);
+  //   }
+  // }
   return (
     <div className="container">
       <h1>Home Page for {user.username} !</h1>
       <p>How are you doing?</p>
+      {/* <p>{quote}</p> */}
       {/* <VideoPlayer /> */}
       {/* <Link to="/addcar">Add Car!</Link>
       {cars &&
