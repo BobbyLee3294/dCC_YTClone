@@ -4,15 +4,22 @@ import useAuth from "../../hooks/useAuth";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 
 const VideoPage = () => {
+  //const [comment, setComment] = useState("");
+
   useEffect(() => {
-    //playVideo or something that starts the VideoPlayer component
+    //playVideo();
   });
-  //inialize playVideo()
+
+  //function playVideo(){};
+
+  //initialize comment component
   return (
-    <>
-      <VideoPlayer />
-      {}
-    </>
+    <div className="container">
+      <div id="player">
+        <VideoPlayer />
+      </div>
+      <div id="commentForm">{/* comment component */}</div>
+    </div>
   );
 };
 
