@@ -26,7 +26,7 @@ const SearchPage = () => {
       );
       console.log(response.data.items);
       setSavedData(response.data.items);
-      // console.log(savedData);
+      console.log(savedData);
     } catch (error) {
       console.log(error.message);
     }
