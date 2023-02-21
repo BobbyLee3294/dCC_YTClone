@@ -9,9 +9,12 @@ const VideoPage = () => {
 
   //create a
   useEffect(() => {
-    //playVideo or something that starts the VideoPlayer component
+    //playVideo();
   });
-  //inialize playVideo()
+
+  //function playVideo(){};
+
+  //initialize comment component
   return (
     <>
       <VideoPlayer videoId={videoId} />
