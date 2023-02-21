@@ -40,7 +40,7 @@ function App() {
           }
         />
         <Route
-          path="/videos/:videoId"
+          path="search/videos/:videoId"
           element={
             <PrivateRoute>
               <VideoPage />
