@@ -6,11 +6,11 @@ import { useParams } from "react-router-dom";
 
 import CommmentForm from "../../components/CommentForm/CommentForm";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
+import { useCustomForm } from "../../hooks/useCustomForm";
 
 const VideoPage = () => {
   const { videoId } = useParams();
   const baseURL = `http://127.0.0.1:8000/api/comments/?video_id=${videoId}`;
-  const [comments, setComments] = useState("");
   const [user, token] = useAuth();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const VideoPage = () => {
       try {
         let response = await axios.get(baseURL, {
           headers: {
-            Authorization: "Bearer: " + token,
+            Authorization: "Bearer " + token,
           },
         });
         setComments(response.data);
@@ -35,7 +35,9 @@ const VideoPage = () => {
         <div>
           <VideoPlayer videoId={videoId} />
         </div>
-        <div>{/* <CommmentForm comments={comments} /> */}</div>
+        <div>
+          <CommmentForm />
+        </div>
       </div>
     </div>
   );
