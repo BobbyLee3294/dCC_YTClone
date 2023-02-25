@@ -28,7 +28,7 @@ const VideoPage = () => {
     };
     getComments();
   }, []);
-  //initialize comment component
+
   return (
     <div>
       <div>
