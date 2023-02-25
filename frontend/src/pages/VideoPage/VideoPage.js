@@ -35,7 +35,9 @@ const VideoPage = () => {
         <div>
           <VideoPlayer videoId={videoId} />
         </div>
-        <div>{/* <CommmentForm /> */}</div>
+        <div>
+          <CommmentForm videoId={videoId} />
+        </div>
       </div>
     </div>
   );
