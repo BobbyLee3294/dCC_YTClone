@@ -6,12 +6,20 @@ import { useParams } from "react-router-dom";
 
 import CommmentForm from "../../components/CommentForm/CommentForm";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
-import { useCustomForm } from "../../hooks/useCustomForm";
+import useCustomForm from "../../hooks/useCustomForm";
 
+let initalValues = {
+  user: "",
+  text: "",
+  videoId: "",
+};
 const VideoPage = () => {
   const { videoId } = useParams();
   const baseURL = `http://127.0.0.1:8000/api/comments/?video_id=${videoId}`;
+  const [comment, setComment] = useState("");
   const [user, token] = useAuth();
+  const [formData = postComment(), handleInputChange, handleSubmit] =
+    useCustomForm(initalValues, postComment);
 
   useEffect(() => {
     const getComments = async () => {
@@ -21,14 +29,33 @@ const VideoPage = () => {
             Authorization: "Bearer " + token,
           },
         });
-        setComments(response.data);
+        getComments(response.data);
       } catch (error) {
         console.log(error.response.data);
       }
     };
     getComments();
   }, []);
-
+  //initialize postComment component
+  function postComment() {
+    axios
+      .post(`http://127.0.0.1:8000/api/comments/`, formData, {
+        headers: {
+          Authorization: "Bearer: " + token,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setComment(response.data);
+        console.log(response.data);
+      });
+    let newComment = {
+      commentName: user.username,
+      commentBody: comment,
+      videoId: videoId,
+    };
+    setComment(newComment);
+  }
   return (
     <div>
       <div>
@@ -36,7 +63,11 @@ const VideoPage = () => {
           <VideoPlayer videoId={videoId} />
         </div>
         <div>
-          <CommmentForm videoId={videoId} />
+          <CommmentForm
+            comment={comment}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
     </div>
