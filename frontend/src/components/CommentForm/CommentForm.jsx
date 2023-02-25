@@ -1,18 +1,34 @@
+import axios from "axios";
 import { default as React, default as React, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
 const CommentForm = (props) => {
   const [comment, setComment] = useState("");
   const [user, token] = useAuth();
+  const [formData, handleInputChange, handleSubmit] = useCustomForm(
+    initalValues,
+    comment
+  );
+  //initialize postComment component
   function handleSubmit(event) {
     event.preventDefault();
+    axios
+      .post(`http://127.0.0.1:8000/api/comments/`, formData, {
+        headers: {
+          Authorization: "Bearer: " + token,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        setComment(response.data);
+        console.log(response.data);
+      });
     let newComment = {
       commentName: user.username,
       commentBody: comment,
       videoId: props.videoId,
     };
-    /* Question: Where do we send this to?*/
-    /* Question: How do we post newComment*/
+    setComment(newComment);
   }
   return (
     <div className="container">
@@ -33,7 +49,7 @@ const CommentForm = (props) => {
                   placeholder="Write something.."
                   value={comment}
                   maxLength="500"
-                  onChange={(e) => setComment(e.target.value)}
+                  onChange={(e) => handleInputChange}
                 />
               </div>
             </div>
