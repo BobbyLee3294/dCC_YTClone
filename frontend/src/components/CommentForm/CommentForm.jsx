@@ -1,17 +1,20 @@
 import axios from "axios";
-import { default as React, default as React, useState } from "react";
+import { React, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import useCustomForm from "../../hooks/useCustomForm";
 
+let initalValues = {
+  user: "",
+  text: "",
+  videoId: "",
+};
 const CommentForm = (props) => {
   const [comment, setComment] = useState("");
   const [user, token] = useAuth();
-  const [formData, handleInputChange, handleSubmit] = useCustomForm(
-    initalValues,
-    comment
-  );
+  const [formData = props.postComment(), handleInputChange, handleSubmit] =
+    useCustomForm(initalValues, comment);
   //initialize postComment component
-  function handleSubmit(event) {
-    event.preventDefault();
+  function postComment() {
     axios
       .post(`http://127.0.0.1:8000/api/comments/`, formData, {
         headers: {
