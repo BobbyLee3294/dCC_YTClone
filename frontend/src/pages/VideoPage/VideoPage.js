@@ -9,9 +9,9 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 import useCustomForm from "../../hooks/useCustomForm";
 
 let initalValues = {
-  user: "",
-  text: "",
+  commentName: "",
   videoId: "",
+  commentBody: "",
 };
 const VideoPage = () => {
   const { videoId } = useParams();
@@ -51,8 +51,8 @@ const VideoPage = () => {
       });
     let newComment = {
       commentName: user.username,
-      commentBody: comment,
       videoId: videoId,
+      commentBody: comment,
     };
     setComment(newComment);
   }
@@ -69,6 +69,7 @@ const VideoPage = () => {
             handleSubmit={handleSubmit}
           />
         </div>
+        <div>{/*  CommentList to show all the comments*/}</div>
       </div>
     </div>
   );
