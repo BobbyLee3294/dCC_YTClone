@@ -15,42 +15,47 @@ let initalValues = {
 };
 const VideoPage = () => {
   const { videoId } = useParams();
-  const baseURL = `http://127.0.0.1:8000/api/comments/?video_id=${videoId}`;
   const [comment, setComment] = useState("");
   const [token] = useAuth();
   const [formData = postComment(), handleInputChange, handleSubmit] =
     useCustomForm(initalValues, postComment);
 
   useEffect(() => {
-    const getComments = async () => {
+    const getCommentsByVideoId = async () => {
       try {
-        let response = await axios.get(baseURL, {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        getComments(response.data);
+        let response = await axios.get(
+          `http://127.0.0.1:8000/api/comments/?video_id=${videoId}`,
+          {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          }
+        );
+        getCommentsByVideoId(response.data);
       } catch (error) {
         console.log(error.response.data);
       }
     };
-    getComments();
   }, []);
   //initialize postComment component
   function postComment() {
     axios
-      .post(`http://127.0.0.1:8000/api/comments/`, formData, {
-        headers: {
-          Authorization: "Bearer: " + token,
-        },
-      })
+      .post(
+        `http://127.0.0.1:8000/api/comments/?video_id=${videoId}`,
+        formData,
+        {
+          headers: {
+            Authorization: "Bearer: " + token,
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
         setComment(response.data);
         console.log(response.data);
       });
     let newComment = {
-      commentName: tempCommentName,
+      commentName: commentName,
       videoId: videoId,
       commentBody: comment,
     };
