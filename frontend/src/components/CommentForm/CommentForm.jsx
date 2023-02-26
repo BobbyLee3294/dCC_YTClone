@@ -1,7 +1,8 @@
-import { React } from "react";
+import { React, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
 const CommentForm = (props) => {
+  const [formComment, setFormComment] = useState(props.comment);
   const [user] = useAuth();
   return (
     <div className="container">
@@ -20,14 +21,15 @@ const CommentForm = (props) => {
                 <textarea
                   id="commentBody"
                   placeholder="Write something.."
-                  value={props.comment}
+                  value={formComment}
                   maxLength="500"
-                  onChange={props.handleInputChange}
+                  onChange={(e) => setFormComment(e.target.value)}
                 />
               </div>
             </div>
           </div>
         </div>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
