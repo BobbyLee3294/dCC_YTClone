@@ -17,7 +17,7 @@ const VideoPage = () => {
   const { videoId } = useParams();
   const baseURL = `http://127.0.0.1:8000/api/comments/?video_id=${videoId}`;
   const [comment, setComment] = useState("");
-  const [user, token] = useAuth();
+  const [token] = useAuth();
   const [formData = postComment(), handleInputChange, handleSubmit] =
     useCustomForm(initalValues, postComment);
 
@@ -50,7 +50,7 @@ const VideoPage = () => {
         console.log(response.data);
       });
     let newComment = {
-      commentName: user.username,
+      commentName: tempCommentName,
       videoId: videoId,
       commentBody: comment,
     };
