@@ -53,7 +53,6 @@ const HomePage = () => {
             {car.year} {car.model} {car.make}
           </p>
         ))} */}
-      {/* TODO #1: place bookshelves here*/}
     </div>
   );
 };

@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { KEY } from "../../YTAPIKey";
 
@@ -26,7 +25,7 @@ const SearchPage = () => {
       );
       console.log(response.data.items);
       setSavedData(response.data.items);
-      // console.log(savedData);
+      console.log(savedData);
     } catch (error) {
       console.log(error.message);
     }
