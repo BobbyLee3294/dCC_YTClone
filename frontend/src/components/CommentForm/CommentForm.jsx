@@ -1,7 +1,5 @@
-import axios from "axios";
-import { React, useState } from "react";
+import { React } from "react";
 import useAuth from "../../hooks/useAuth";
-import useCustomForm from "../../hooks/useCustomForm";
 
 const CommentForm = (props) => {
   const [user] = useAuth();
