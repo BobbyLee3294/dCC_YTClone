@@ -16,7 +16,7 @@ let initalValues = {
 const VideoPage = () => {
   const { videoId } = useParams();
   const [comment, setComment] = useState("");
-  const [token] = useAuth();
+  const [user, token] = useAuth();
   const [formData = postComment(), handleInputChange, handleSubmit] =
     useCustomForm(initalValues, postComment);
 
@@ -55,7 +55,7 @@ const VideoPage = () => {
         console.log(response.data);
       });
     let newComment = {
-      commentName: commentName,
+      commentName: user.username,
       videoId: videoId,
       commentBody: comment,
     };
