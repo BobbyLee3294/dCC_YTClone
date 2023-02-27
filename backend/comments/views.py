@@ -24,6 +24,8 @@ def get_comments_by_video_id(request, video_id):
         if serializer.is_valid():
             serializer.save(user=request.user, video_id=video_id)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            serializer.is_valid(raise_exception=False)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     elif request.method == 'GET':
         comments = Comment.objects.filter(video_id=video_id)
