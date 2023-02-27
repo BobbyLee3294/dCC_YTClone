@@ -1,11 +1,11 @@
 import { React } from "react";
 import useAuth from "../../hooks/useAuth";
 
-const CommentForm = ({ formComment, handleInputChange, handleSubmit }) => {
+const CommentForm = ({ formComment, setFormComment, postComment }) => {
   const [user] = useAuth();
   return (
     <div className="container">
-      <form id="comment-form" onSubmit={handleSubmit}>
+      <form id="comment-form" onSubmit={postComment}>
         <div className="mb-1 row">
           <label htmlFor="commentName" className="col-sm-1">
             Created by
@@ -22,7 +22,7 @@ const CommentForm = ({ formComment, handleInputChange, handleSubmit }) => {
                   placeholder="Write something.."
                   value={formComment}
                   maxLength="500"
-                  onChange={handleInputChange}
+                  onChange={(e) => setFormComment(e.target.value)}
                 />
               </div>
             </div>
