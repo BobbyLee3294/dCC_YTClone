@@ -11,11 +11,12 @@ import useCustomForm from "../../hooks/useCustomForm";
 let initalValues = {
   commentName: "",
   videoId: "",
-  commentBody: "",
+  text: "",
 };
 const VideoPage = () => {
   const { videoId } = useParams();
-  const [comment, setComment] = useState("");
+  const baseURL = `http://127.0.0.1:8000/api/comments/${videoId}/`;
+  const [formComment, setFormComment] = useState("");
   const [user, token] = useAuth();
   const [formData = postComment(), handleInputChange, handleSubmit] =
     useCustomForm(initalValues, postComment);
@@ -23,14 +24,7 @@ const VideoPage = () => {
   useEffect(() => {
     const getCommentsByVideoId = async () => {
       try {
-        let response = await axios.get(
-          `http://127.0.0.1:8000/api/comments/?video_id=${videoId}`,
-          {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          }
-        );
+        let response = await axios.get(baseURL);
         getCommentsByVideoId(response.data);
       } catch (error) {
         console.log(error.response.data);
@@ -40,26 +34,21 @@ const VideoPage = () => {
   //initialize postComment component
   function postComment() {
     axios
-      .post(
-        `http://127.0.0.1:8000/api/comments/?video_id=${videoId}`,
-        formData,
-        {
-          headers: {
-            Authorization: "Bearer: " + token,
-          },
-        }
-      )
+      .post(baseURL, formData, {
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
       .then((response) => {
         console.log(response);
         setComment(response.data);
-        console.log(response.data);
       });
     let newComment = {
       commentName: user.username,
       videoId: videoId,
-      commentBody: comment,
+      text: formComment,
     };
-    setComment(newComment);
+    setFormComment(newComment);
   }
   return (
     <div>
@@ -69,7 +58,7 @@ const VideoPage = () => {
         </div>
         <div>
           <CommmentForm
-            comment={comment}
+            formComment={formComment}
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
           />
