@@ -5,6 +5,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import CommmentForm from "../../components/CommentForm/CommentForm";
+import CommentList from "../../components/CommentList/CommentList";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 
 const VideoPage = () => {
@@ -53,7 +54,7 @@ const VideoPage = () => {
             postComment={postComment}
           />
         </div>
-        <div>{/*  CommentList to show all the comments*/}</div>
+        <div>{/* <CommentList /> */}</div>
       </div>
     </div>
   );
