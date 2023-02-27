@@ -1,12 +1,11 @@
-import { React, useState } from "react";
+import { React } from "react";
 import useAuth from "../../hooks/useAuth";
 
-const CommentForm = (props) => {
-  const [formComment, setFormComment] = useState(props.comment);
+const CommentForm = ({ formComment, handleInputChange, handleSubmit }) => {
   const [user] = useAuth();
   return (
     <div className="container">
-      <form id="comment-form" onSubmit={props.handleSubmit}>
+      <form id="comment-form" onSubmit={handleSubmit}>
         <div className="mb-1 row">
           <label htmlFor="commentName" className="col-sm-1">
             Created by
@@ -19,11 +18,11 @@ const CommentForm = (props) => {
               </label>
               <div className="col-sm-11">
                 <textarea
-                  id="commentBody"
+                  name="commentBody"
                   placeholder="Write something.."
                   value={formComment}
                   maxLength="500"
-                  onChange={(e) => setFormComment(e.target.value)}
+                  onChange={handleInputChange}
                 />
               </div>
             </div>
