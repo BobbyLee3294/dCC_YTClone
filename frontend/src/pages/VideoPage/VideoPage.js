@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 
-import SearchBar from "../../components/SearchBar/SearchBar";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+
+import CommentForm from "../../components/CommentForm/CommentForm";
 import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 
 const VideoPage = () => {
@@ -44,7 +47,7 @@ const VideoPage = () => {
           <VideoPlayer videoId={videoId} />
         </div>
         <div>
-          <CommmentForm
+          <CommentForm
             formComment={formComment}
             setFormComment={setFormComment}
             postComment={postComment}
