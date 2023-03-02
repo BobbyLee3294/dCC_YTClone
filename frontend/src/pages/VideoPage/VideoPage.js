@@ -11,6 +11,7 @@ import VideoPlayer from "../../components/VideoPlayer/VideoPlayer";
 const VideoPage = () => {
   const { videoId } = useParams();
   const baseURL = `http://127.0.0.1:8000/api/comments/${videoId}/`;
+  const [comments, setComments] = useState([]);
   const [formComment, setFormComment] = useState("");
   const [user, token] = useAuth();
 
@@ -18,7 +19,9 @@ const VideoPage = () => {
     const getCommentsByVideoId = async () => {
       try {
         let response = await axios.get(baseURL);
+        console.log("retriving comments...");
         getCommentsByVideoId(response.data);
+        setComments(getCommentsByVideoId);
       } catch (error) {
         console.log(error.response.data);
       }
@@ -38,7 +41,8 @@ const VideoPage = () => {
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+        setComments(response.data, ...comments);
       });
   }
   return (
@@ -54,7 +58,9 @@ const VideoPage = () => {
             postComment={postComment}
           />
         </div>
-        <div>{/* <CommentList /> */}</div>
+        <div>
+          <CommentList comments={comments} />
+        </div>
       </div>
     </div>
   );
