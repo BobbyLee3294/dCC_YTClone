@@ -1,11 +1,12 @@
 import React from "react";
+import Comment from "../Comment/Comment";
 
-const CommentList = ({ setFormComment }) => {
+const CommentList = ({ comments }) => {
   return (
     <div>
-      {setFormComment.map((comment, index) => {
-        return <div key={index}>{comment}</div>;
-      })}
+      {comments.map((comment, index) => (
+        <Comment key={index} comment={comment} />
+      ))}
     </div>
   );
 };
