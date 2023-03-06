@@ -4,8 +4,8 @@ import Comment from "../Comment/Comment";
 const CommentList = ({ comments }) => {
   return (
     <div>
-      {comments.map((comment, index) => (
-        <Comment key={index} comment={comment} />
+      {Object.values(comments).map((comments, index) => (
+        <Comment key={index} comments={comments} />
       ))}
     </div>
   );
