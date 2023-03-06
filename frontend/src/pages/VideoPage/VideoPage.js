@@ -18,14 +18,21 @@ const VideoPage = () => {
   useEffect(() => {
     const getCommentsByVideoId = async () => {
       try {
-        let response = await axios.get(baseURL);
-        console.log("retriving comments...");
-        getCommentsByVideoId(response.data);
-        setComments(getCommentsByVideoId);
+        axios
+          .get(baseURL, {
+            headers: {
+              Authorization: "Bearer " + token,
+            },
+          })
+          .then((response) => {
+            console.log("Retriving comments...");
+            setComments(response.data);
+          });
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error.message);
       }
     };
+    getCommentsByVideoId();
   }, []);
   //initialize postComment component
   function postComment(e) {
@@ -41,7 +48,8 @@ const VideoPage = () => {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        console.log(response.data.user.username);
+        console.log(response.data.text);
         setComments(response.data, ...comments);
       });
   }
