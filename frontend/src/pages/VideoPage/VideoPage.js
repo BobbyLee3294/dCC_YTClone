@@ -35,7 +35,7 @@ const VideoPage = () => {
     getCommentsByVideoId();
   }, []);
 
-  //initialize postComment function
+  //initialize postComment function which will also be used as a handleSubmit handler for CommentForm
   function postComment(e) {
     e.preventDefault();
     let newComment = {
@@ -51,6 +51,7 @@ const VideoPage = () => {
       .then((response) => {
         console.log(response.data.user.username);
         console.log(response.data.text);
+        debugger;
         setComments(response.data, ...comments);
       });
   }
