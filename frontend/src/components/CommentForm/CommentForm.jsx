@@ -2,7 +2,7 @@ import { React } from "react";
 import useAuth from "../../hooks/useAuth";
 
 const CommentForm = ({ formComment, setFormComment, postComment }) => {
-  const [user] = useAuth();
+  const [user, token] = useAuth();
   return (
     <div className="container">
       <form id="comment-form" onSubmit={postComment}>
