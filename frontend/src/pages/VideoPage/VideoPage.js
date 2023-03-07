@@ -34,7 +34,8 @@ const VideoPage = () => {
     };
     getCommentsByVideoId();
   }, []);
-  //initialize postComment component
+
+  //initialize postComment function
   function postComment(e) {
     e.preventDefault();
     let newComment = {
