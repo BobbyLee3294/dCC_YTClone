@@ -16,44 +16,48 @@ const VideoPage = () => {
   const [user, token] = useAuth();
 
   useEffect(() => {
-    const getCommentsByVideoId = async () => {
-      try {
-        axios
-          .get(baseURL, {
-            headers: {
-              Authorization: "Bearer " + token,
-            },
-          })
-          .then((response) => {
-            console.log("Retriving comments...");
-            setComments(response.data);
-          });
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
     getCommentsByVideoId();
   }, []);
 
+  async function getCommentsByVideoId() {
+    try {
+      axios
+        .get(baseURL, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then((response) => {
+          console.log("Retriving comments...");
+          setComments(response.data, ...comments);
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   //initialize postComment function which will also be used as a handleSubmit handler for CommentForm
-  function postComment(e) {
+  async function postComment(e) {
     e.preventDefault();
     let newComment = {
       video_id: videoId,
       text: formComment,
     };
-    axios
-      .post(baseURL, newComment, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      })
-      .then((response) => {
-        console.log(response.data.user.username);
-        console.log(response.data.text);
-        debugger;
-        setComments(response.data, ...comments);
-      });
+    try {
+      axios
+        .post(baseURL, newComment, {
+          headers: {
+            Authorization: "Bearer " + token,
+          },
+        })
+        .then(async (response) => {
+          console.log(response.data.user.username);
+          console.log(response.data.text);
+          await getCommentsByVideoId();
+        });
+    } catch (error) {
+      console.log(error.message);
+    }
   }
   return (
     <div>
